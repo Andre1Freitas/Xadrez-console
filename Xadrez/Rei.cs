@@ -10,7 +10,7 @@ namespace Xadrez_console.Xadrez
 
         public override string ToString()
         {
-            return "R ";
+            return "R";
         }
     }
 }

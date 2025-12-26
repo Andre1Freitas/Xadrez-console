@@ -1,5 +1,6 @@
 ﻿using Xadrez_console.tabuleiro;
 using System.Collections.Generic;
+using xadrez;
 
 namespace Xadrez_console.Xadrez
 {
@@ -238,6 +239,8 @@ namespace Xadrez_console.Xadrez
             ColocarNovaPeca('e', 7, new Torre(Cor.Preta, Tab));
             ColocarNovaPeca('e', 8, new Torre(Cor.Preta, Tab));
             ColocarNovaPeca('d', 8, new Rei(Cor.Preta, Tab));
+
+            ColocarNovaPeca('h', 2, new Peao(Cor.Branca, Tab));
         }
     }
 }

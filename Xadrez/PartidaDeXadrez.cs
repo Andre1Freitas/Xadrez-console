@@ -65,7 +65,7 @@ namespace Xadrez_console.Xadrez
                 if (origem.Coluna != destino.Coluna && pecaCapturada == null)
                 {
                     Posicao posP;
-                    if(p.Cor == Cor.Branca)
+                    if (p.Cor == Cor.Branca)
                     {
                         posP = new Posicao(destino.Linha + 1, destino.Coluna);
                     }
@@ -143,6 +143,22 @@ namespace Xadrez_console.Xadrez
                 throw new TabuleiroException("Voce nao pode se colocar em xeque");
             }
 
+            Peca p = Tab.Peca(destino);
+
+            // jogada especial promocao
+
+            if (p is Peao)
+            {
+                if ((p.Cor == Cor.Branca && destino.Linha == 0) || (p.Cor == Cor.Preta && destino.Linha == 7))
+                {
+                    p = Tab.RetirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(p.Cor, Tab);
+                    Tab.ColocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+            }
+
             if (EstaEmXeque(adversaria(JogadorAtual)))
             {
                 Xeque = true;
@@ -161,8 +177,6 @@ namespace Xadrez_console.Xadrez
                 Turno++;
                 MudaJogador();
             }
-
-            Peca p = Tab.Peca(destino);
 
             // jogada especial en passant
             if (p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
